@@ -1,11 +1,49 @@
+/**
+ * @author Ana Silva
+ */
+
+/**
+ * @var express
+ *      node framework to make my life easier
+ * @var morgan
+ *      Logger middleware.
+ * @var bodyParser
+ *      Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+ * @var port
+ *      Sets the port to be used by the application
+ */
 var express = require("express");
-var router = express.Router();
+var morgan = require("morgan");
+var bodyParser = require("body-parser");
+var port = process.env.PORT || 3000;
+
+/**
+ * Loads all the api specific routes
+ */
 var api = require('./routes/api.routes');
 
 var app = express();
 
+/**
+ * log stuff
+ */
+app.use(morgan('dev'));
+
+/**
+ * bind specific routes into the main file
+ */
 app.use('/api', api);
 
-app.listen(3000, () => {
+/**
+ * index route
+ */
+app.get('/', (req, res) => {
+    res.send("Application works");
+});
+
+/**
+ * application listening on the port
+ */
+app.listen(port, () => {
     console.log("Server running on port 3000");
 });
