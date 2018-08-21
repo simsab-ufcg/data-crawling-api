@@ -16,6 +16,7 @@ var express = require("express");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var port = process.env.PORT || 3000;
+require('./config/auth.config');
 
 /**
  * Loads all the api specific routes
