@@ -1,7 +1,19 @@
+/**
+ * Html crawler utils.
+ * 
+ * @author Felipe Mota
+ */
 var JSSoup = require('jssoup').default;
 var axios = require('axios');
 const URL = 'http://transferserver.insa.gov.br'
 
+/**
+ * Crawler will get html source-code from the path 
+ * and will parse the data to find the files and 
+ * folders of directory.
+ * @param {String} path 
+ * @param {Object} response 
+ */
 exports.crawlerPage = (path, response) => {
   axios.get(URL + path).then((res) =>{
     var soup = new JSSoup(res.data);
