@@ -10,11 +10,15 @@ var controller = require('./../controllers/controller')
 /**
  * route that loads the root of the api 
  */
+
 router.get('/', controller.getRoot);
 
 /**
  *  route that loads all avaliable datasets
  */
+
 router.get('/dataset', controller.getAllDataSets);
+router.post('/dataset', controller.getSpecificDataSets);
+
 
 module.exports = router;

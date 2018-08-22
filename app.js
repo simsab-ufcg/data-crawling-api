@@ -26,6 +26,12 @@ var api = require('./routes/api.routes');
 var app = express();
 
 /**
+ * Parsing body
+ */
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+/**
  * log stuff
  */
 app.use(morgan('dev'));
