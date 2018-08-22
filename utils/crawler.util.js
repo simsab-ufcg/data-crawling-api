@@ -38,7 +38,9 @@ exports.crawlerPage = (path, response) => {
       if(result.Name != "Parent Directory")
         ls.push(result);
     }
+    ls.push(URL+path);
     response.send(ls);
+    console.log(URL + path);
   }).catch((err) =>{
     console.log(err.message);
   });
