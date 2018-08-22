@@ -12,10 +12,11 @@
  * @var port
  *      Sets the port to be used by the application
  */
+require('dotenv').load();
 var express = require("express");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 6000;
 require('./config/auth.config');
 
 /**
@@ -24,6 +25,10 @@ require('./config/auth.config');
 var api = require('./routes/api.routes');
 
 var app = express();
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').load();
+  }
 
 /**
  * Parsing body
@@ -52,5 +57,5 @@ app.get('/', (req, res) => {
  * application listening on the port
  */
 app.listen(port, () => {
-    console.log("Server running on port 3000");
+    console.log("Server running on port " +port);
 });
