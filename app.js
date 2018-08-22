@@ -11,6 +11,8 @@
  *      Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
  * @var port
  *      Sets the port to be used by the application
+ * @requires dotenv
+ *      Load enviroment file
  */
 require('dotenv').load();
 var express = require("express");
