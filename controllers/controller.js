@@ -17,3 +17,8 @@ exports.getSpecificDataSets = (req, res, next) => {
 exports.connectFtp = (req, res, next) => {
     ftpUtil.connectFtp(req.body.config, res, next);
 }
+
+exports.list = (req, res, next) => {
+    ftpUtil.listFiles(res);
+}
+

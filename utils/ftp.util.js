@@ -4,28 +4,26 @@
  * @author Filipe Mendonca
  */
 
-var Client = require('ftp');
-var c = new Client();
+// https://github.com/humy2833/easy-ftp#readme
+var EasyFtp = require('easy-ftp');
+var ftp = new EasyFtp();
 
+/**
+ * 
+ * @param {Object should have  this attributes: host, type, port, username and password } config 
+ */
 exports.connectFtp = (config, res, next) => {
 
-  c.end();
-  c = new Client();
-
-  c.on('ready', function() {
-    res.status(201).send('FTP connection successfully established');
-    return next();
-  });
-
-  c.on('error', function() {
-    res.status(400).send('Could not establish FTP connection');
-    return next();
-  });
-
-  c.connect(config);
+    ftp.connect(config);
+    res.send("ok");
 
 }
 
-exports.getClient = () => {
-    return c;
+exports.listFiles = (res) => {
+
+    ftp.pwd((err, path) => {
+        ftp.ls(path, (err, list) => {
+            res.send(list);
+        })
+    })
 }

@@ -22,5 +22,7 @@ router.post('/dataset', controller.getSpecificDataSets);
 
 router.post('/ftp/connect', controller.connectFtp);
 
+router.get('/ftp/list', controller.list);
+
 
 module.exports = router;
