@@ -74,11 +74,9 @@ module.exports = function(app) {
               res.redirect("/join");
             } else {
               client.query(
-                'INSERT INTO users (id, "firstName", "lastName", username, password) VALUES ($1, $2, $3, $4, $5)',
+                'INSERT INTO users (id, username, password) VALUES ($1, $2, $3)',
                 [
                   uuidv4(),
-                  req.body.firstName,
-                  req.body.lastName,
                   req.body.username,
                   pwd
                 ],
