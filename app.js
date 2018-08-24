@@ -30,7 +30,7 @@ require('./config/auth.config');
  * Loads all the api specific routes
  */
 var api = require('./routes/api.routes');
-
+var auth = require('./routes/auth.routes');
 /**
  * Loads other dependencies.
  */
@@ -65,6 +65,8 @@ app.use(morgan('dev'));
  * bind specific routes into the main file
  */
 app.use('/api', api);
+
+app.use('/auth', auth);
 
 /**
  * index route
