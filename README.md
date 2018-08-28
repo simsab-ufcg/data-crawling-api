@@ -11,5 +11,4 @@ Crawls [INSA Transfer Server](https://transferserver.insa.gov.br/) listing its d
 | Route | Description | Request method |
 |--|--|--|
 |`/api/`|Application 'home' route  | GET |
-|`/api/dataset` | List datasets route directory | GET |
-|`/api/dataset` | List datasets specified by the 'path' field (inside the body request) | POST |
+|`/api/dataset` | Without parameter will list all datasets, if add 'dataset' parameter will list all files inside of the specified dataset. | GET |

@@ -26,12 +26,18 @@ exports.crawlerPage = (path, request, response) => {
     // Create list with all directory rows.
     var tr = body.findAll('tr');
     var tableSize = tr.length;
+    
+    // Return object
     var ls = [];
+
+    // Find colunm names
     var td0 = tr[0].findAll('th');
     var names = [];
     for(var i = 1; i < td0.length; i += 1){
       names.push(td0[i].nextElement.text);
     }
+
+    // Create each directory object
     for(var i = 2; i < tableSize - 1; i+=1){
       var td = tr[i].findAll('td');
       var result = {};
@@ -53,8 +59,8 @@ exports.crawlerPage = (path, request, response) => {
       ls.push(result);
     }
     
+    // Searching especific dataset
     var search_dataset = request.query.dataset;
-
     if(search_dataset === undefined || path !== ""){
       response.status(200).send(ls);  
     }else{
@@ -64,6 +70,7 @@ exports.crawlerPage = (path, request, response) => {
       if(ls.length == 0){
         response.status(404).send("Dataset not found.");
       }else{
+        // Search recursively this dataset files
         crawler.crawlerPage(ls[0].Name, request, response);
       }
 
