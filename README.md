@@ -12,3 +12,7 @@ Crawls [INSA Transfer Server](https://transferserver.insa.gov.br/) listing its d
 |--|--|--|
 |`/api/`|Application 'home' route  | GET |
 |`/api/dataset` | Without parameter will list all datasets, if add 'dataset' parameter will list all files inside of the specified dataset. | GET |
+
+## Change HTML or FTP Crawler
+
+Set FTP_FLAG and fill FTP parameters in env file, by default API will use HTML crawler.
