@@ -20,7 +20,7 @@ router.get('/', controller.getRoot);
 router.get('/dataset', (res, req, next) => {
     if(process.env.FTP_FLAG){
         controller.connectFtp(res, req, next).then(() => {
-            cotroller.list(res, req, next);
+            controller.list(res, req, next);
         });
     }else{
         controller.getDataSets(res, req, next);
