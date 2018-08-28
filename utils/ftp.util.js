@@ -14,7 +14,13 @@ var ftp = new EasyFtp();
  */
 exports.connectFtp = (config, res, next) => {
 
-    ftp.connect(config);
+    ftp.connect({
+        host: process.env.FTP_HOST,
+        port: process.env.FTP_PORT,
+        username: process.env.FTP_username,
+        password: process.env.FTP_password,
+        type : 'ftp'
+    });
     res.send("ok");
 
 }

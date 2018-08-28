@@ -31,6 +31,7 @@ require('./config/auth.config');
  */
 var api = require('./routes/api.routes');
 var auth = require('./routes/auth.routes');
+var app = express();
 /**
  * Loads other dependencies.
  */
@@ -43,8 +44,6 @@ app.use(flash());
 app.use(session({secret: process.env.ANOTHER_SECRET_KEY}));
 app.set('view engine', 'pug');
 app.set('view options', { layout: false });
-
-var app = express();
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').load();
