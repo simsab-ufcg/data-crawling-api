@@ -1,19 +1,17 @@
 'use strict';
-var ftpUtil = require('../utils/ftp.util');
-var crawler = require('../utils/crawler.util');
+
+var data = require('../controllers/data.controller')
+var dataset = require('../controllers/dataset.controller')
+
 
 exports.getRoot = (req, res, next) => {
     res.status(400).send('Hello world!');
 }
 
-exports.connectFtp = (req, res, next) => {
-    ftpUtil.connectFtp(req.body.config, res, next);
-}
-
-exports.list = (req, res, next) => {
-    ftpUtil.listFiles(res);
-}
-
-exports.getDataSets = (req, res, next) => {
-    crawler.crawlerPage("", req, res);
+exports.dataset = (req, res, next) => {
+    if(req.query.dataset){
+        data.getData(req, res, next);
+    }else{
+        dataset.getDataSets(req, res, next);
+    }
 }
