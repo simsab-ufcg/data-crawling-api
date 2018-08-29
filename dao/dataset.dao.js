@@ -2,35 +2,37 @@
  * @author Gabriel Felipe, Ana Silva
  */
 
- const getClient = () => {
-    var pg = require("pg");
+const dbConfig = require('../config/db.config');
 
-    var connectionURL = process.env.connectionURL || 'postgresql://postgres:simsab@localhost:5432/simsab_dataset';
+exports.listDataSets = (next) => {
 
-    var client = new pg.Client(connectionURL);
-
-    client.connect();
-
-    return client;
- };
-
-exports.listDatasets = (callback) => {
-
-    const client = getClient();
+    const client = dbConfig.connect();
 
     client.query(`SELECT ds.name, ds.created_date, 
         ds.updated_date, ds.description, SUM(d.size) as size 
         FROM dataset as ds JOIN data as d ON d.dataset_id = ds.id
         GROUP BY ds.id;`, (err, res) => {
+
+            if(err)
+                throw err;
             
-            var ret = res.rows;
+            const ret = res.rows;
             
-            callback(ret);
+            dbConfig.disconnect(client);
+
+            next(ret);
         });
 }
 
-exports.createDataset = () => {
+exports.postDataSet = (dataSet, next) => {
+    const client = dbConfig.connect();
 
-    const client = getClient();
-    
+    client.query(`INSERT INTO dataset (name, created_date, updated_date, description) VALUES ($1, $2, $3, $4);`, 
+        [dataSet.name, dataSet.created_date, dataSet.updated_date, dataSet.description], (err, res) => {
+        client.query('SELECT id, name FROM dataset WHERE name = $1;', [dataSet.name], (err, res) => {
+            if(err)
+                throw err;
+            next(res.rows[0].id);
+        });
+    });
 };

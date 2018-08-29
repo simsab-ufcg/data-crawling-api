@@ -4,11 +4,15 @@
 
  'use strict';
 
-var dao = require("../dao/dataset.dao");
+const dao = require("../dao/dataset.dao");
 
 exports.getDataSets = (req, res, next) => {
     const callback = (result) => {
         res.send(result);
     };
-    dao.listDatasets(callback);   
-}
+    dao.listDataSets(callback);   
+};
+
+exports.postDataSet = (dataSet, next) => {
+    dao.postDataSet(dataSet, next);
+};

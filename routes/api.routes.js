@@ -17,8 +17,8 @@ router.get('/', controller.getRoot);
  *  route that loads all avaliable datasets
  */
 
-router.get('/dataset', controller.getDataset);
+router.get('/dataset', controller.getDataSet);
 
-router.post('/dataset', controller.postDataset);
+router.post('/dataset', controller.postDataSet);
 
 module.exports = router;
