@@ -7,5 +7,8 @@
 var dao = require("../dao/dataset.dao");
 
 exports.getDataSets = (req, res, next) => {
-    res.send(dao.listDatasets());
+    const callback = (result) => {
+        res.send(result);
+    };
+    dao.listDatasets(callback);   
 }

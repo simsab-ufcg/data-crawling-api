@@ -4,7 +4,7 @@
 
  var pg = require("pg");
 
- var connectionURL = process.env.connectionURL || 'postgres://localhost:5432/simsab-dataset';
+ var connectionURL = process.env.connectionURL || 'postgres://postgres:simsab@localhost:5432/simsab_dataset';
 
 var client = new pg.Client(connectionURL);
 
