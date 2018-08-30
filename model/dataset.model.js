@@ -10,7 +10,7 @@ var client = new pg.Client(connectionURL);
 
 client.connect();
 
-client.query("CREATE TABLE IF NOT EXISTS dataset(id SERIAL PRIMARY KEY, name VARCHAR(50) NOT NULL UNIQUE, created_date TIMESTAMP, updated_date TIMESTAMP NOT NULL, description TEXT);", (err, res) =>{
+client.query("CREATE TABLE IF NOT EXISTS dataset(id SERIAL PRIMARY KEY, name VARCHAR(50) NOT NULL UNIQUE, created_at TIMESTAMP, updated_at TIMESTAMP NOT NULL, description TEXT);", (err, res) =>{
     client.end();
 });
 

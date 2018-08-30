@@ -6,10 +6,10 @@
 
 const dao = require("../dao/data.dao");
 
-exports.getData = (dataset, next) => {
-    dao.getData(dataset, next);
+exports.getData = (dataset) => {
+    return dao.getData(dataset);
 }
 
 exports.postData = (dataSetId, data) => {
-    dao.postData(dataSetId, data);
+    return dao.postData(dataSetId, data);
 }

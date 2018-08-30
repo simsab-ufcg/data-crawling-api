@@ -10,11 +10,21 @@ exports.getRoot = (req, res, next) => {
 
 exports.getDataSet = (req, res, next) => {
     if(req.query.dataset){
-        dataController.getData(req.query.dataset, (data) => {
-            res.send(data);
-        });
+        dataController.getData(req.query.dataset)
+            .then((data) => {
+                res.send(data);
+            })
+            .catch((err) => {
+                res.status(400).send('');
+            });
     }else{
-        dataSetController.getDataSets(req, res, next);
+        dataSetController.getDataSets()
+            .then((data) => {
+                res.send(data)
+            })
+            .catch((err) => {
+                res.status(400).send('');
+            });
     }
 }
 
@@ -24,20 +34,30 @@ exports.postDataSet = (req, res, next) => {
 
     const dataSet = {
         name: body.name,
-        created_date: body.created_date,
-        updated_date: body.updated_date,
+        created_at: body.created_at,
+        updated_at: body.updated_at,
         description: body.description
     };
 
     const data = body.data;
 
-    const insertDataSetData = (dataSetId) => {
-        data.forEach((element) => {
-            dataController.postData(dataSetId, element);
-        });
-        res.send(200);
-    };
+    dataSetController.postDataSet(dataSet)
+        .then((dataSetId) => {
+            
+            const ndata = data.map((element) => {
+                return dataController.postData(dataSetId, element);
+            });
 
-    dataSetController.postDataSet(dataSet, insertDataSetData);
+            Promise.all(ndata)
+            .then(() => {
+                res.status(200).send();
+            }).catch((err) => {
+                res.status(400).send();
+            });
+
+        })
+        .catch((err) => {
+            res.status(400).send('');
+        });
     
 }
