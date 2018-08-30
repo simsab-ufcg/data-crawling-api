@@ -25,6 +25,7 @@ var passport = require("passport");
 var path = require("path");
 var flash = require("connect-flash");
 require('./config/auth.config');
+const datasetModel = require('./model/dataset.model');
 
 /**
  * Loads all the api specific routes
