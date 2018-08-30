@@ -17,7 +17,7 @@ exports.getData = (datasetName) => {
                 if(err)
                     reject(err);
 
-                var ret = res.rows;
+                const ret = res.rows;
                 
                 dbConfig.disconnect(client);
 
